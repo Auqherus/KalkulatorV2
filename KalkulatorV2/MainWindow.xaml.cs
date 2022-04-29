@@ -28,10 +28,13 @@ namespace KalkulatorV2
 
             Currentekran.Text += currentNumber;
         }
+
+        
         private void bplus_Click(object sender, RoutedEventArgs e)
         {
             var calculate = Currentekran.Text;
-            if (calculate.Contains('+')){
+            if (WhatOperation(calculate))
+            {
 
                 Currentekran.Text = Calc(calculate).ToString();
             }
@@ -42,7 +45,8 @@ namespace KalkulatorV2
         private void bminus_Click(object sender, RoutedEventArgs e)
         {
             var calculate = Currentekran.Text;
-            if (calculate.Contains('-')){
+            if (WhatOperation(calculate))
+            {
 
                 Currentekran.Text = Calc(calculate).ToString();
             }
@@ -52,7 +56,8 @@ namespace KalkulatorV2
         private void brazy_Click(object sender, RoutedEventArgs e)
         {
             var calculate = Currentekran.Text;
-            if (calculate.Contains('*')){
+            if (WhatOperation(calculate))
+            {
 
                 Currentekran.Text = Calc(calculate).ToString();
             }
@@ -63,7 +68,8 @@ namespace KalkulatorV2
         {
 
             var calculate = Currentekran.Text;
-            if (calculate.Contains('/')){
+            if (WhatOperation(calculate))
+            {
 
                 Currentekran.Text = Calc(calculate).ToString();
                 
@@ -93,6 +99,10 @@ namespace KalkulatorV2
 
             Currentekran.Text += currentNumber;
         }
+
+        private bool WhatOperation(string calculate) 
+            => calculate.Contains('+') || calculate.Contains('-') || calculate.Contains('*') ||
+                calculate.Contains('/');
 
         private int Calc(string calculate)
         {
