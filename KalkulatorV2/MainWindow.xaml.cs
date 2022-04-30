@@ -20,7 +20,7 @@ namespace KalkulatorV2
         private void button_Click(object sender, RoutedEventArgs e)
         {
             ekran.Text = string.Empty;
-            
+
 
             var button = sender as Button;
 
@@ -29,7 +29,7 @@ namespace KalkulatorV2
             Currentekran.Text += currentNumber;
         }
 
-        
+
         private void bplus_Click(object sender, RoutedEventArgs e)
         {
             var calculate = Currentekran.Text;
@@ -65,25 +65,43 @@ namespace KalkulatorV2
         }
 
         private void bdivine_Click(object sender, RoutedEventArgs e)
-        {
-
+        { 
             var calculate = Currentekran.Text;
+            var Numbers = calculate.Split('/');
+
             if (WhatOperation(calculate))
             {
+               
+                if (int.Parse(Numbers[1]) == 0)
+                {
+                    ekran.Text = "Nie dziel przez zero!";
 
-                Currentekran.Text = Calc(calculate).ToString();
-                
+                    
+                }
+                else
+                {
+                    int resoult = int.Parse(Numbers[0]) / int.Parse(Numbers[1]);
+                    Currentekran.Text = resoult.ToString();
+                    ekran.Text = "";
+                }
+
+                 
             }
-
-           
+            
             Currentekran.Text += "/";
+
         }
 
         private void bequal_Click(object sender, RoutedEventArgs e)
         {
             var calculate = Currentekran.Text;
+            
+            if (WhatOperation(calculate))
+            {
 
-            ekran.Text = Calc(calculate).ToString();
+
+                ekran.Text = Calc(calculate).ToString();
+            }
 
             Currentekran.Text = string.Empty;
         }
@@ -100,50 +118,44 @@ namespace KalkulatorV2
             Currentekran.Text += currentNumber;
         }
 
-        private bool WhatOperation(string calculate) 
-            => calculate.Contains('+') || calculate.Contains('-') || calculate.Contains('*') ||
-                calculate.Contains('/');
+        private bool WhatOperation(string calculate)
+            => calculate.Contains('+') || calculate.Contains('-') || calculate.Contains('*')
+            || calculate.Contains('/');
 
         private int Calc(string calculate)
         {
-            string test = "404";
-            
             if (calculate.Contains('+'))
             {
                 var Numbers = calculate.Split('+');
                 return int.Parse(Numbers[0]) + int.Parse(Numbers[1]);
-               
+
             }
             if (calculate.Contains('-'))
             {
                 var Numbers = calculate.Split('-');
                 return int.Parse(Numbers[0]) - int.Parse(Numbers[1]);
-                
+
             }
             if (calculate.Contains('*'))
             {
                 var Numbers = calculate.Split('*');
                 return int.Parse(Numbers[0]) * int.Parse(Numbers[1]);
-               
+
             }
-            if (calculate.Contains('/'))
-            {
-                var Numbers = calculate.Split('/');
 
-                if (int.Parse(Numbers[1]) == 0)
-                {
 
-                    return int.Parse(test);
 
-                }
 
-                return int.Parse(Numbers[0]) / int.Parse(Numbers[1]);
-                
- 
-            }
-            return default;
+            return 404;
         }
+
+        private void Dziel()
+        {
+            string wyjatek = "";
+
+        }
+
     }
 
-    
+
 }
